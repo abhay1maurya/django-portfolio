@@ -18,6 +18,9 @@
     <title>Abhay</title>
     <link rel="icon" href="{% static 'website/images/title/pandion.ico' %}" type="image/icon type">
 
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="{% static 'website/css/hash.css' %}">
+
     <!-- css -->
     <link rel="stylesheet" href="{% static 'website/index.css' %}">
     <link rel="stylesheet" href="{% static 'website/theme/core.css' %}">
@@ -168,32 +171,40 @@
     <div class="space"></div>
 
     <div id="about" class="container-fluid about">
-        <div class="about-img">
-            <img id="about-img" src="{% static 'website/images/about/about.png' %}" alt="my journey highlights" height="500">
-        </div>
-
-        <div class="about-text">
-            <p id="about-me-title">About Me</p>
-
-            <h1 id="about-me-heading">Hello Pals! My name is Abhay</h1>
-
-            <p id="about-quote">
-                “Nothing is impossible even the word say i-m-possible”
-            </p>
-
-            <p id="about-me-text">Abhay Maurya is a dual-degree student at IIT Madras (Data Science) and Uttarakhand Technical University (Computer Science). Skilled in Machine Learning, Deep Learning, Python, and C++, he excels in problem-solving, leadership, and data analysis. He aims to leverage technology for impactful insights in data science.🚀
-            </p>
-
-            <div class="download-resume">
-                <button type="button" onclick="downloadResume()" class="btn btn-success" id="download-btn">
-                    <i class="fa fa-file-text" style="color: black; background-color: transparent;"></i>
-                    <span
-                        style="color: black; background-color: transparent; font-size: 14px; padding-left: 8px;">Download
-                        Resume</span>
-                </button>
-            </div>
-        </div>
+    <div class="about-img">
+        <img id="about-img" src="{% static 'website/images/about/about.png' %}" alt="my journey highlights" height="500">
     </div>
+
+    <div class="about-text">
+        
+        <p id="about-me-title">{{ about.title }}</p>
+
+        <h1 id="about-me-heading">{{ about.heading }}</h1>
+
+        <p id="about-quote">
+            “{{ about.quote }}”
+        </p>
+
+        <p id="about-me-text">
+            {{ about.description }}
+        </p>
+
+        {% if user.is_authenticated and user.is_superuser %}
+            <a href="{% url 'edit_about' %}" class="btn btn-warning mt-3">Edit About Me</a>
+        {% endif %}
+
+        {% if about.resume %}
+        <div class="download-resume">
+            <a href="{{ about.resume }}" target="_blank" class="btn btn-success" id="download-btn" rel="noopener noreferrer">
+                <i class="fa fa-file-text" style="color: black; background-color: transparent;"></i>
+                <span style="color: black; background-color: transparent; font-size: 14px; padding-left: 8px;">
+                    View Resume
+                </span>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
 
     <div id="tech" class=" tech-stack">
         <div class="tech-stack-detail">
@@ -225,6 +236,9 @@
             <p class="label-stack">Server Tech</p>
             <div id="server-tech" data-aos="fade-right" data-aos-delay="700" class="tech-row"></div>
         </div>
+
+
+
 
         <div class="stack-illustration">
             <img id="stack-illustration" src="{% static 'website/images/svgs/stack.svg' %}" alt="stack illustrations">
@@ -295,7 +309,7 @@
         </p>
 
     </div> -->
-
+ 
     
 
         
@@ -329,6 +343,17 @@
 
             </div>
         </div>
+    </div>
+    <!-- hash -->
+    <div >
+        <div class="hash-card">
+            <h5 id="hhead">Hash Generator</h5>
+            
+            
+            <a id="bform" href="{% url 'student_form' %}">Fill Out Form</a>
+        </div>
+        
+        
     </div>
 
     <footer class="foot">
